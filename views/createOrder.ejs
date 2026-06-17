@@ -9,15 +9,30 @@
 </head>
 
 <body>
-  <% // Helper to format Date or String for datetime-local input function formatDateForInput(d) { if (!d) return '' ; if
-    (typeof d==='string' && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}/.test(d)) { return d.slice(0, 16); } const date=new Date(d);
-    if (isNaN(date.getTime())) return '' ; const year=date.getFullYear(); const month=String(date.getMonth() +
-    1).padStart(2, '0' ); const day=String(date.getDate()).padStart(2, '0' ); const
-    hours=String(date.getHours()).padStart(2, '0' ); const minutes=String(date.getMinutes()).padStart(2, '0' ); return
-    `${year}-${month}-${day}T${hours}:${minutes}`; } // Helper to get start of today in YYYY-MM-DDTHH:MM format function
-    getTodayMin() { const now=new Date(); const year=now.getFullYear(); const month=String(now.getMonth() +
-    1).padStart(2, '0' ); const day=String(now.getDate()).padStart(2, '0' ); return `${year}-${month}-${day}T00:00`; }
-    %>
+  <% 
+    function formatDateForInput(d) { 
+      if (!d) return ''; 
+      if (typeof d === 'string' && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}/.test(d)) { 
+        return d.slice(0, 16); 
+      } 
+      const date = new Date(d);
+      if (isNaN(date.getTime())) return ''; 
+      const year = date.getFullYear(); 
+      const month = String(date.getMonth() + 1).padStart(2, '0'); 
+      const day = String(date.getDate()).padStart(2, '0'); 
+      const hours = String(date.getHours()).padStart(2, '0'); 
+      const minutes = String(date.getMinutes()).padStart(2, '0'); 
+      return `${year}-${month}-${day}T${hours}:${minutes}`; 
+    } 
+
+    function getTodayMin() {
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const day = String(now.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}T00:00`;
+    }
+  %>
 
     <div class="container">
       <h1>Create New Order</h1>
