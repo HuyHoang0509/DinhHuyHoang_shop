@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order List</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div class="container">
+    <h1>Order List</h1>
+
+    <% if (typeof error !== 'undefined' && error) { %>
+      <div class="error-banner">
+        <span>⚠️</span>
+        <%= error %>
+      </div>
+    <% } %>
+
+    <div class="table-responsive">
+      <% if (orders && orders.length > 0) { %>
+        <table>
+          <thead>
+            <tr>
+              <th>Customer Name</th>
+              <th>Product Name</th>
+              <th>Quantity</th>
+              <th>Order Date</th>
+              <th>Total Price</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% orders.forEach(order => { %>
+              <tr>
+                <td><%= order.customerName %></td>
+                <td><%= order.productName %></td>
+                <td><%= order.quantity %></td>
+                <td><%= new Date(order.orderDate).toLocaleString() %></td>
+                <td><%= order.totalPrice %></td>
+                <td>
+                  <div class="action-buttons">
+                    <a href="/orders/update/<%= order._id %>" class="btn btn-primary btn-sm">Edit</a>
+                    <form action="/orders/delete/<%= order._id %>" method="POST" style="display: inline;">
+                      <button type="submit" class="btn btn-secondary btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
+                    </form>
+                  </div>
+                </td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      <% } else { %>
+        <div class="empty-state">
+          <p>No orders found.</p>
+        </div>
+      <% } %>
+    </div>
+
+    <div class="center-btn-container">
+      <a href="/orders/create" class="btn btn-primary">Create Order</a>
+    </div>
+  </div>
+</body>
+
+</html>
